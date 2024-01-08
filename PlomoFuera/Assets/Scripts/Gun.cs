@@ -1,15 +1,17 @@
 using StarterAssets;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class Gun : MonoBehaviour
 {
+    [SerializeField] GameObject ammo;
     [SerializeField] int currentAmmo;
     [SerializeField] int maxAmmo;
     [SerializeField] bool canShoot;
     [SerializeField] float shootTimeOutDelta;
-
     [SerializeField] StarterAssetsInputs _input;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,20 +36,23 @@ public class Gun : MonoBehaviour
     private void Shoot()
     {        
         if (_input.shoot && canShoot && shootTimeOutDelta <= 0.0f)
-        {
-            Debug.Log(currentAmmo <= 0);
-            if (currentAmmo <= 0)
-            {                
-                Reload();
-            }
+        {                
+            shootTimeOutDelta = 0.1f; //tiempo para que solo gaste una bala al disparar
 
-            shootTimeOutDelta = 0.1f;
-            Debug.Log("shoot");
 
-            //Disparo
             // poner sonido disparar
             // disparar bala
-            currentAmmo--;
+            Instantiate(ammo, transform.position, transform.rotation);
+
+            currentAmmo--; //resta las balas
+
+            //Cuando la munición llega a 0 se llama a la función de recargar            
+            if (currentAmmo <= 0)
+            {
+                //poner sonido sin balas
+                Debug.Log("sonido no balas");
+                Reload();
+            }
 
             //Raycast
             Vector3 pos = Input.mousePosition;
@@ -57,12 +62,14 @@ public class Gun : MonoBehaviour
             {
                 if (hitInfo.collider.tag.Equals("Enemy"))
                 {
-
-
+                    //quitar vida al enemigo
                 }
-            }            
+            }
+
+            
         }
 
+        //tiempo para que solo gaste una bala al disparar
         if (shootTimeOutDelta >= 0.0f)
         {
             shootTimeOutDelta -= Time.deltaTime;
@@ -77,13 +84,13 @@ public class Gun : MonoBehaviour
 
     IEnumerator WaitReload()
     {
-        //sonido recargar
-        canShoot = false;
-        Debug.Log("Reloading");
-        yield return new WaitForSeconds(3);
-        Debug.Log("Reloaded");
-        currentAmmo = maxAmmo;
-        canShoot = true;
+        //poner sonido de recarga
+        Debug.Log("recargando");
+        canShoot = false; //false para que no pueda disparar mientras recarga
+        yield return new WaitForSeconds(3); //tiempo a esperar mientras recarga
+        Debug.Log("regargada");
+        currentAmmo = maxAmmo; //reincia la munición
+        canShoot = true; //true para que pueda disparar
     }
 
 }
