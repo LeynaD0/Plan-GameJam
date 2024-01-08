@@ -6,7 +6,8 @@ public class Gun : MonoBehaviour
 {
     [SerializeField] int currentAmmo;
     [SerializeField] int maxAmmo;
-    [SerializeField] bool canShoot = true;
+    [SerializeField] bool canShoot;
+    [SerializeField] float shootTimeOutDelta;
 
     [SerializeField] StarterAssetsInputs _input;
 
@@ -14,61 +15,64 @@ public class Gun : MonoBehaviour
     void Start()
     {
         currentAmmo = maxAmmo;
+        shootTimeOutDelta = 0.1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        
-                
-                Shoot();
-            
-        
+        Shoot();
 
         if (_input.reload)
         {
             Reload();
-        }        
+        }            
     }
 
 
     //Disparar
     private void Shoot()
-    {
-            if (_input.shoot && canShoot)
-            {
-                Debug.Log("shoot");
-
-                canShoot = false;
-                //Disparo
-                //sonido disparar
-                currentAmmo--;
-
-                //Raycast
-                Vector3 pos = Input.mousePosition;
-                Ray rayo = Camera.main.ScreenPointToRay(pos);
-                RaycastHit hitInfo;
-                if (Physics.Raycast(rayo, out hitInfo))
-                {
-                    if (hitInfo.collider.tag.Equals("Enemy"))
-                    {
-
-
-                    }
-                }
-                canShoot = true;
-            }    
-        if(currentAmmo <= 0)
+    {        
+        if (_input.shoot && canShoot && shootTimeOutDelta <= 0.0f)
         {
-            Reload();
+            Debug.Log(currentAmmo <= 0);
+            if (currentAmmo <= 0)
+            {                
+                Reload();
+            }
+
+            shootTimeOutDelta = 0.1f;
+            Debug.Log("shoot");
+
+            //Disparo
+            // poner sonido disparar
+            // disparar bala
+            currentAmmo--;
+
+            //Raycast
+            Vector3 pos = Input.mousePosition;
+            Ray rayo = Camera.main.ScreenPointToRay(pos);
+            RaycastHit hitInfo;
+            if (Physics.Raycast(rayo, out hitInfo))
+            {
+                if (hitInfo.collider.tag.Equals("Enemy"))
+                {
+
+
+                }
+            }            
         }
+
+        if (shootTimeOutDelta >= 0.0f)
+        {
+            shootTimeOutDelta -= Time.deltaTime;
+        }        
     }
 
     //Recargar
     private void Reload()
-    {   
-        StartCoroutine(WaitReload());        
+    {
+        StartCoroutine(WaitReload());               
     }
 
     IEnumerator WaitReload()

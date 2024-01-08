@@ -558,6 +558,7 @@ MonoBehaviour:
   currentAmmo: 0
   maxAmmo: 20
   canShoot: 1
+  shootTimeOutDelta: 0
   _input: {fileID: 1455754611}
 --- !u!4 &1851037285
 Transform:
