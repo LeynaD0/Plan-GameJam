@@ -43,7 +43,7 @@
                 },
                 {
                     "name": "Shoot",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "5cc5a1e6-c906-42f6-9b07-e3355e388837",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -52,7 +52,7 @@
                 },
                 {
                     "name": "Reload",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "dee5433d-f817-4bba-9eb1-736679f9665d",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -61,7 +61,7 @@
                 },
                 {
                     "name": "Interact",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "082b6643-e8e9-47cd-a63a-55129a4deaae",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -70,7 +70,7 @@
                 },
                 {
                     "name": "Pause",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "ae455157-95d8-44af-ad8c-d38e22c3e0ed",
                     "expectedControlType": "Button",
                     "processors": "",
