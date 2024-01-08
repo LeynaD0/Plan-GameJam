@@ -123,6 +123,29 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &672522955 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2681469212145940326, guid: 2d3996248b230534b87fa62e30f75304, type: 3}
+  m_PrefabInstance: {fileID: 1193723755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &672522960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672522955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d676ed3156f03f641b6bbaeae4bc6c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammo: {fileID: 6867355951865679178, guid: 73af08900138988409431814f5efde80, type: 3}
+  currentAmmo: 0
+  maxAmmo: 30
+  canShoot: 1
+  shootTimeOutDelta: 0
+  _input: {fileID: 1455754611}
 --- !u!1 &685758452
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +311,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2681469212145940326, guid: 2d3996248b230534b87fa62e30f75304, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 672522960}
   m_SourcePrefab: {fileID: 100100000, guid: 2d3996248b230534b87fa62e30f75304, type: 3}
 --- !u!1001 &1260364520
 PrefabInstance:
@@ -526,60 +552,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1851037283
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1851037285}
-  - component: {fileID: 1851037284}
-  m_Layer: 0
-  m_Name: Gun
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1851037284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1851037283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d676ed3156f03f641b6bbaeae4bc6c7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentAmmo: 0
-  maxAmmo: 20
-  canShoot: 1
-  _input: {fileID: 1455754611}
---- !u!4 &1851037285
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1851037283}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8986397, y: 4.5307603, z: -1.4403896}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1810107759}
-  - {fileID: 1851037285}
   - {fileID: 1193723755}
   - {fileID: 685758456}
   - {fileID: 1260364520}
