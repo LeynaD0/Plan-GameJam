@@ -9,6 +9,9 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private Enemy m_Enemy;
     [SerializeField]private Enemy.TypeBehaviour m_TypeBehaviour;
     [Space(3)]
+    [Header("Speeds")]
+    [SerializeField] private float _speed;
+    [Space(3)]
     [Header("Overlap")]
     [SerializeField] private float _radius;
     [SerializeField] private int _layer;
@@ -18,10 +21,14 @@ public class EnemyBehavior : MonoBehaviour
     [Space(3)]
     [Header("Target")]
     [SerializeField] private Transform _target;
+    public Transform target { get { return _target; } set { _target = value; } }
+    [Space(3)]
+    [Header("Control")]
+    public bool inReach;
     // Start is called before the first frame update
     void Start()
     {
-        m_TypeBehaviour = m_Enemy.type;
+        //m_TypeBehaviour = m_Enemy.type;
     }
 
     // Update is called once per frame
@@ -42,20 +49,30 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Escape()
     {
-        Debug.Log("Huyendo del JUGADOR");
+        if (inReach)
+        {
+            Debug.Log("Huyendo del JUGADOR");
+
+            //Realizar comportamiento de escapada de los enemigos
+            Vector3 roamPosition;
+
+            roamPosition = GetRoamingPosition();
+            transform.position += roamPosition * Time.deltaTime * _speed;
+        }
     }
 
     private void TargetingPlayer()
     {
         Debug.Log("Atacando al jugador");
-        Collider[] colliderArray = Physics.OverlapSphere(transform.position, _radius, _layer);
-
-        foreach (Collider collider in colliderArray)
-        {
-            if (collider.TryGetComponent<FirstPersonController>(out FirstPersonController _player))
-            {
-                //_target = collider.gameObject.
-            }
-        }
+        
+        //Realizar comportamiento de ataque de los enemigos
+    }
+    private Vector3 GetRoamingPosition()
+    {
+        return transform.position + GetRandomDir() * Random.Range(5f, 10f); ;
+    }
+    public static Vector3 GetRandomDir()
+    {
+        return new Vector3(Random.Range(-1f, 1f), 0.0f).normalized;
     }
 }
