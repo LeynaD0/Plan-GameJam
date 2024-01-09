@@ -18,5 +18,8 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    //destruir cuando choque con algo
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+    }
 }

@@ -5,23 +5,29 @@ using UnityEngine.Animations;
 
 public class Gun : MonoBehaviour
 {
+    [Header("Ammo")]
     [SerializeField] GameObject ammo;
-    [SerializeField] GameObject player;
     [SerializeField] int currentAmmo;
     [SerializeField] int maxAmmo;
     [SerializeField] bool canShoot;
-    [SerializeField] float shootTimeOutDelta;
+    [SerializeField] float shootTimeOutDelta; //tiempo para que solo se dispare una bala
+
+    [Header("Player")]
+    [SerializeField] GameObject player; 
     [SerializeField] StarterAssetsInputs _input;
+    /*
+    [Header("Audio")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip shootAudio;
+    [SerializeField] AudioClip reloadAudio;
+    [SerializeField] AudioClip noBulletsAudio;*/
 
-
-    // Start is called before the first frame update
     void Start()
     {
         currentAmmo = maxAmmo;
-        shootTimeOutDelta = 0.1f;
+        shootTimeOutDelta = 0.1f; //tiempo para que solo se dispare una bala
     }
 
-    // Update is called once per frame
     void Update()
     {
         Shoot();
@@ -32,19 +38,18 @@ public class Gun : MonoBehaviour
         }            
     }
 
-
     //Disparar
     private void Shoot()
     {        
         if (_input.shoot && canShoot && shootTimeOutDelta <= 0.0f)
         {                
-            shootTimeOutDelta = 0.1f; //tiempo para que solo gaste una bala al disparar
+            shootTimeOutDelta = 0.1f; //tiempo para que solo se dispare una bala
 
+            // poner sonido disparo
+            //audioSource.clip = shootAudio;
+            //audioSource.Play();
 
-            // poner sonido disparar
-            // disparar bala
-            Vector3 pos = Input.mousePosition;
-            Instantiate(ammo, transform.position, player.transform.rotation);
+            Instantiate(ammo, transform.position, player.transform.rotation); //dispara una bala 
 
             currentAmmo--; //resta las balas
 
@@ -52,26 +57,14 @@ public class Gun : MonoBehaviour
             if (currentAmmo <= 0)
             {
                 //poner sonido sin balas
-                Debug.Log("sonido no balas");
+                //audioSource.clip = noBulletsAudio;
+                //audioSource.Play();
+
                 Reload();
             }
-
-            //Raycast
-            Ray rayo = Camera.main.ScreenPointToRay(pos);
-            RaycastHit hitInfo;
-            if (Physics.Raycast(rayo, out hitInfo))
-            {
-                if (hitInfo.collider.tag.Equals("Enemy"))
-                {
-
-                    //quitar vida al enemigo
-                }
-            }
-
-            
         }
 
-        //tiempo para que solo gaste una bala al disparar
+        //tiempo para que solo se dispare una bala
         if (shootTimeOutDelta >= 0.0f)
         {
             shootTimeOutDelta -= Time.deltaTime;
@@ -87,10 +80,10 @@ public class Gun : MonoBehaviour
     IEnumerator WaitReload()
     {
         //poner sonido de recarga
-        Debug.Log("recargando");
+        //audioSource.clip = reloadAudio;
+        //audioSource.Play();
         canShoot = false; //false para que no pueda disparar mientras recarga
         yield return new WaitForSeconds(3); //tiempo a esperar mientras recarga
-        Debug.Log("regargada");
         currentAmmo = maxAmmo; //reincia la munición
         canShoot = true; //true para que pueda disparar
     }

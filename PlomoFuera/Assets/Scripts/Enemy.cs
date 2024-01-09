@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[CreateAssetMenu(fileName = "new enemy", menuName = "IA/enemy")]
-public class Enemy : MonoBehaviour//ScriptableObject
+public class Enemy : MonoBehaviour
 {
-    //[SerializeField] string enemyName;
-    //public GameObject enemyObj;
     [SerializeField] int health;
     [SerializeField] int points;    
     
@@ -16,6 +13,8 @@ public class Enemy : MonoBehaviour//ScriptableObject
         shoot
     };
     [SerializeField] TypeBehaviour behaviour;
+
+    public TypeBehaviour type; //puesto para quitar un error con otro Script - revisar cuando se pueda quitar/modificar
 
     private void Start()
     {
@@ -29,18 +28,26 @@ public class Enemy : MonoBehaviour//ScriptableObject
         }
     }
 
-    public void SubtractHealth(int amount)
+    public void Health(int amount)
     {
         health -= amount;
         if (health <= 0)
         {
             Points.instance.AddPoints(points);
-            //matar
+            Death();
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        //cuando le llega una bala llama a la funcion de quitar vida
+        if (other.CompareTag("Bullet"))
+        {
+            Health(1);
+        }
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
     }
 }
