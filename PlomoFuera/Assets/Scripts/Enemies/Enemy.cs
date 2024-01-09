@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] int health;
     [SerializeField] int points;    
+
+    private Rigidbody[] rb;
     
     public enum TypeBehaviour
     { 
@@ -18,7 +20,13 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        if(behaviour == TypeBehaviour.run)
+        rb = transform.GetComponentsInChildren<Rigidbody>();
+        foreach (Rigidbody rigidbody in rb)
+        {
+            rigidbody.isKinematic = true;
+        }
+
+        if (behaviour == TypeBehaviour.run)
         {
 
         } 
@@ -48,6 +56,11 @@ public class Enemy : MonoBehaviour
 
     public void Death()
     {
-        Destroy(gameObject);
+        foreach(Rigidbody rigidbody in rb)
+        {
+            rigidbody.isKinematic = false;
+        }
+
+        Destroy(gameObject, 5);
     }
 }
