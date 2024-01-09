@@ -29,13 +29,18 @@ public class Enemy : MonoBehaviour//ScriptableObject
         }
     }
 
-    public void Health()
+    public void SubtractHealth(int amount)
     {
-        health--;
+        health -= amount;
         if (health <= 0)
         {
             Points.instance.AddPoints(points);
             //matar
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //cuando le llega una bala llama a la funcion de quitar vida
     }
 }
