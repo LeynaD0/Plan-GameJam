@@ -6,6 +6,7 @@ using UnityEngine.Animations;
 public class Gun : MonoBehaviour
 {
     [SerializeField] GameObject ammo;
+    [SerializeField] GameObject player;
     [SerializeField] int currentAmmo;
     [SerializeField] int maxAmmo;
     [SerializeField] bool canShoot;
@@ -42,7 +43,8 @@ public class Gun : MonoBehaviour
 
             // poner sonido disparar
             // disparar bala
-            Instantiate(ammo, transform.position, transform.rotation);
+            Vector3 pos = Input.mousePosition;
+            Instantiate(ammo, transform.position, player.transform.rotation);
 
             currentAmmo--; //resta las balas
 
@@ -55,13 +57,13 @@ public class Gun : MonoBehaviour
             }
 
             //Raycast
-            Vector3 pos = Input.mousePosition;
             Ray rayo = Camera.main.ScreenPointToRay(pos);
             RaycastHit hitInfo;
             if (Physics.Raycast(rayo, out hitInfo))
             {
                 if (hitInfo.collider.tag.Equals("Enemy"))
                 {
+
                     //quitar vida al enemigo
                 }
             }

@@ -5,23 +5,18 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField]
-    float speed = 60, time = 0;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    float speed = 60, timeToDestroy = 5;
+    
     void Update()
     {
         transform.position += transform.forward * Time.deltaTime * speed;
-        time += Time.deltaTime;
+        timeToDestroy -= Time.deltaTime;
 
-        if (time > 10)
+        if (timeToDestroy <= 0)
         {
             Destroy(gameObject);
         }
     }
+
+    //destruir cuando choque con algo
 }
