@@ -1,7 +1,6 @@
 using StarterAssets;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Animations;
 
 public class Gun : MonoBehaviour
 {
