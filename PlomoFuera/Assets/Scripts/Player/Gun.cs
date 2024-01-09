@@ -11,9 +11,7 @@ public class Gun : MonoBehaviour
     [SerializeField] int maxAmmo;
     [SerializeField] bool canShoot;
     [SerializeField] float shootTimeOutDelta; //tiempo para que solo se dispare una bala
-
-    [Header("Player")]
-    [SerializeField] GameObject player; 
+    [SerializeField] GameObject targetRotation; 
     [SerializeField] StarterAssetsInputs _input;
     /*
     [Header("Audio")]
@@ -49,7 +47,7 @@ public class Gun : MonoBehaviour
             //audioSource.clip = shootAudio;
             //audioSource.Play();
 
-            Instantiate(ammo, transform.position, player.transform.rotation); //dispara una bala 
+            Instantiate(ammo, transform.position, targetRotation.transform.rotation); //dispara una bala 
 
             currentAmmo--; //resta las balas
 
