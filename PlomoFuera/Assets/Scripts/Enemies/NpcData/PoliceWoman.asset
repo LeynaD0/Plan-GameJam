@@ -16,3 +16,5 @@ MonoBehaviour:
   _npcPrefab: {fileID: 0}
   _type: 3
   _state: 3
+  healthBase: 3
+  pointsBase: 8

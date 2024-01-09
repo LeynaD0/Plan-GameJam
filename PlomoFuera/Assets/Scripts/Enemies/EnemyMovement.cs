@@ -14,6 +14,7 @@ public class EnemyMovement : MonoBehaviour
     [Space(3)]
     [Header("Nav Mesh")]
     [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private float _stopDist;
 
     [Space(3)]
     [Header("Target")]
@@ -49,6 +50,10 @@ public class EnemyMovement : MonoBehaviour
         {
             _agent = GetComponent<NavMeshAgent>();
         }
+        if (_anim is null)
+        {
+            _anim = GetComponentInChildren<Animator>();
+        }
     }
 
     // Update is called once per frame
@@ -72,6 +77,12 @@ public class EnemyMovement : MonoBehaviour
                 _anim.SetBool("Running", false);
                 _anim.SetBool("Pistol", false);
                 Chasing();
+                break;
+            case NpcStates.FEAR:
+                _isRandom = false;
+                _anim.SetTrigger("Fear");
+                _anim.SetBool("Walk", false);
+                Feared();
                 break;
             case NpcStates.ATTACKING:
                 _isRandom = false;
@@ -97,7 +108,8 @@ public class EnemyMovement : MonoBehaviour
         //Movimiento en caso de que el enemigo vaya a 
         //atacar al jugador.
         _agent.SetDestination(pos);
-        _agent.isStopped = false;
+        _agent.stoppingDistance = _stopDist;
+        //_agent.isStopped = true;        
     }
 
     private void RunAway(Vector3 pos)
@@ -109,6 +121,11 @@ public class EnemyMovement : MonoBehaviour
     private void Chasing()
     {
         MoveToPos(_targetToChase.position);
+
+        if (_agent.isStopped)
+        {
+            state = NpcStates.ATTACKING;
+        }
     }
 
     private void RandomPositionMovement()
@@ -139,5 +156,10 @@ public class EnemyMovement : MonoBehaviour
 
         result = Vector3.zero;
         return false;
+    }
+
+    private void Feared()
+    {
+        _agent.isStopped = true;
     }
 }
