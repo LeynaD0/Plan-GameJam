@@ -5,8 +5,9 @@ using UnityEngine;
 public class DetectArea : MonoBehaviour
 {
     [SerializeField] private EnemyDisplay m_Display;
-    [SerializeField] private EnemyBehavior _behaviour;
     [SerializeField] private EnemyMovement _movement;
+
+    public int randomBehaviour;
 
     private void Start()
     {
@@ -25,10 +26,15 @@ public class DetectArea : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            switch(m_Display.Base._type)
+            randomBehaviour = Random.Range(0, 2);
+
+            switch (m_Display.Base._type)
             {
                 case NpcType.STUDENT:
-                    _movement.state = NpcStates.RUN_AWAY;
+                    if (randomBehaviour == 0)
+                        _movement.state = NpcStates.FEAR;
+                    else if(randomBehaviour == 1)
+                        _movement.state = NpcStates.RUN_AWAY;
                     break;
                 case NpcType.TEACHER:
                     break;

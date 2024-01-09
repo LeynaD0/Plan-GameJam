@@ -1,44 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] int health;
-    [SerializeField] int points;    
+    [Header("Display")]
+    [SerializeField]private EnemyDisplay _display;
+    [Space(3)]
+    [Header("Health and Points")]
+    [SerializeField]private int maxHealth;
+    [SerializeField]private int health;
+    [SerializeField]private int points;
+    [Space(3)]
+    [Header("Helth Bar")]
+    [SerializeField] private Slider _healthBar;
 
     private Rigidbody[] rb;
     
-    public enum TypeBehaviour
-    { 
-        run,
-        shoot
-    };
-    [SerializeField] TypeBehaviour behaviour;
-
-    public TypeBehaviour type; //puesto para quitar un error con otro Script - revisar cuando se pueda quitar/modificar
 
     private void Start()
     {
+        if (_display is null)
+        {
+            _display = GetComponent<EnemyDisplay>();
+        }
         rb = transform.GetComponentsInChildren<Rigidbody>();
+
+        maxHealth = _display.Base.healthBase;
+        health = maxHealth;
+        points = _display.Base.pointsBase;
+
         foreach (Rigidbody rigidbody in rb)
         {
             rigidbody.isKinematic = true;
         }
 
-        if (behaviour == TypeBehaviour.run)
-        {
 
-        } 
-        else if(behaviour == TypeBehaviour.shoot)
-        {
-
-        }
+        _healthBar.maxValue = maxHealth;
+        _healthBar.minValue = 0;
+        _healthBar.value = health;
     }
 
     public void Health(int amount)
     {
         health -= amount;
+        _healthBar.value = health;
+
         if (health <= 0)
         {
             Points.instance.AddPoints(points);
