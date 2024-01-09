@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
             _curHealth = 0;
             Dead();
         }
+
         ///IFs de TEST -> ELIMINAR
         if (Input.GetKeyDown(KeyCode.Q))
         {
