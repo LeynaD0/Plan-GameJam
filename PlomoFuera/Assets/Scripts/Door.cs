@@ -6,6 +6,7 @@ public class Door : MonoBehaviour
 {
     [SerializeField] private Animator door;
     [SerializeField] private bool doorIsOpen = false;
+    [SerializeField] bool isToilet;
 
     private void Start()
     {
@@ -16,17 +17,36 @@ public class Door : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Afdd");
-            if (doorIsOpen)
+            if (isToilet)
             {
-                door.Play("DoorClose");
-                doorIsOpen = false;
+                if (doorIsOpen)
+                {
+                    door.Play("ToiletDoorClose");
+                    doorIsOpen = false;
+                }
+                else
+                {
+                    door.Play("ToiletDoorOpen");
+                    doorIsOpen = true;
+                }
             }
             else
             {
-                door.Play("DoorOpen");
-                doorIsOpen = true;
+                if (doorIsOpen)
+                {
+                    door.Play("DoorClose");
+                    doorIsOpen = false;
+                }
+                else
+                {
+                    door.Play("DoorOpen");
+                    doorIsOpen = true;
+                }
             }
+
+            
         }
     }
+
+    //ontrigger stay para que salga la interaccion 
 }
