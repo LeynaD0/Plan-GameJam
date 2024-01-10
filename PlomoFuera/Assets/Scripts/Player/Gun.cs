@@ -15,8 +15,7 @@ public class Gun : MonoBehaviour
     
     [Header("Audio")]
     [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip shootAudio;
-    //[SerializeField] AudioClip reloadAudio;
+    [SerializeField] AudioClip reloadAudio;
     [SerializeField] AudioClip noBulletsAudio;
 
     void Start()
@@ -40,15 +39,7 @@ public class Gun : MonoBehaviour
     {        
         if (_input.shoot && canShoot && shootTimeOutDelta <= 0.0f)
         {                
-            shootTimeOutDelta = 0.1f; //tiempo para que solo se dispare una bala
-
-            //sonido disparo
-            audioSource.clip = shootAudio;
-            if (!audioSource.isPlaying)
-            {                
-                audioSource.Play();
-            }
-            
+            shootTimeOutDelta = 0.1f; //tiempo para que solo se dispare una bala            
 
             Instantiate(ammo, transform.position, targetRotation.transform.rotation); //dispara una bala 
 
@@ -81,8 +72,8 @@ public class Gun : MonoBehaviour
     IEnumerator WaitReload()
     {
         //poner sonido de recarga
-        //audioSource.clip = reloadAudio;
-        //audioSource.Play();
+        audioSource.clip = reloadAudio;
+        audioSource.Play();
         canShoot = false; //false para que no pueda disparar mientras recarga
         yield return new WaitForSeconds(3); //tiempo a esperar mientras recarga
         currentAmmo = maxAmmo; //reincia la munición

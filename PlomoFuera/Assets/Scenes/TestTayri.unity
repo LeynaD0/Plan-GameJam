@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -338,7 +338,7 @@ MonoBehaviour:
   targetRotation: {fileID: 1106290905}
   _input: {fileID: 1455754611}
   audioSource: {fileID: 672522961}
-  shootAudio: {fileID: 8300000, guid: 2f137b3f27c4b50409a815888745e61a, type: 3}
+  reloadAudio: {fileID: 8300000, guid: 633ccc99b37ecb44e8f1d21bfcce7a23, type: 3}
   noBulletsAudio: {fileID: 8300000, guid: 917dfc28da724f240b8b148299db14b4, type: 3}
 --- !u!82 &672522961
 AudioSource:
@@ -645,10 +645,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6261ef2b7d59d1b44809cbcb5dab9882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _display: {fileID: 0}
+  maxHealth: 0
   health: 10
   points: 5
-  behaviour: 0
-  type: 0
+  _healthBar: {fileID: 0}
 --- !u!1001 &1001459363
 PrefabInstance:
   m_ObjectHideFlags: 0
