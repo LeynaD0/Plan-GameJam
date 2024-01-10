@@ -20,14 +20,15 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        Destroy(gameObject, 1);
+        /*if (other.CompareTag("Enemy"))
         {
             Destroy(gameObject);
         }
         else if (other.CompareTag("Player"))
         {
             Destroy(gameObject);
-        }
-        
+        }*/
+
     }
 }
