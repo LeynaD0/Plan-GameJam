@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawns : MonoBehaviour
 {
     [SerializeField]
-    GameObject enemy;
+    GameObject[] enemy;
     [SerializeField]
     int posX, posZ, EnemyCount;
     // Start is called before the first frame update
@@ -20,7 +20,8 @@ public class Spawns : MonoBehaviour
         {
             posX = Random.Range(-34, 0);
             posZ = Random.Range(-33, 32);
-            Instantiate(enemy, new Vector3(posX, 1, posZ), Quaternion.identity);
+            int i = Random.Range(0, enemy.Length);
+            Instantiate(enemy[i], new Vector3(posX, 1, posZ), Quaternion.identity);
             yield return new WaitForSeconds(1);
             EnemyCount += 1;
         }

@@ -17238,7 +17238,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8659630b6e99c18498b7d68cb501de66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 5443902736315805911, guid: 61bf79afe7c47b049af13fd4bc149f96, type: 3}
+  enemy:
+  - {fileID: 7544928054665993249, guid: dd3e96e6c7d6ab3418a10fdc441001ce, type: 3}
+  - {fileID: 2532506020378217670, guid: 138968641274a8c4e838eb3750e7a90d, type: 3}
+  - {fileID: 6535899646536943918, guid: 7e00d7d42b3286044846288f343930ef, type: 3}
+  - {fileID: 4776271003539880387, guid: 1beaf2524f1e9dd4c9cb31a6544d9d00, type: 3}
+  - {fileID: 2259715510779632498, guid: b2001a0bfdac23048a632ae8142826ca, type: 3}
+  - {fileID: 7048639551243931056, guid: b6dbe992158021d47af035986ce823d9, type: 3}
+  - {fileID: 4856168909150116637, guid: a5239f7376dc03d40be16d91eb90cd51, type: 3}
+  - {fileID: 5643837162700078622, guid: 4d3092042d9645941934168104b00c6e, type: 3}
+  - {fileID: 5443902736315805911, guid: 61bf79afe7c47b049af13fd4bc149f96, type: 3}
+  - {fileID: 2167134350181560503, guid: 2bf9c2c76cb9ec8458647264de8e4a4c, type: 3}
   posX: 0
   posZ: 0
   EnemyCount: 0
