@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,8 +55,16 @@ public class EnemyMovement : MonoBehaviour
         {
             _anim = GetComponentInChildren<Animator>();
         }
+        
     }
-
+    void Awake()
+    {
+        if (_target is null)
+        {
+            _target = FindFirstObjectByType<FirstPersonController>().transform;
+            Debug.Log("Obtenido");
+        }
+    }
     // Update is called once per frame
     void Update()
     {

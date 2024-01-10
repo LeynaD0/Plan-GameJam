@@ -797,7 +797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd87a731ce724c7409b72f9114871539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Base: {fileID: 11400000, guid: 1b5db06fbd2a4304a85998e56a525702, type: 2}
+  m_Base: {fileID: 11400000, guid: 989515fbfc712b84eae57864f885a9f0, type: 2}
   _name: {fileID: 7642402062643552057}
 --- !u!114 &5288429926126212452
 MonoBehaviour:
@@ -832,7 +832,7 @@ MonoBehaviour:
   _state: 0
   _agent: {fileID: 6827466610661750098}
   _stopDist: 8
-  _target: {fileID: 0}
+  _target: {fileID: 9057219957798036389, guid: 2d3996248b230534b87fa62e30f75304, type: 3}
   _targetToChase: {fileID: 0}
   displacementDist: 5
   _anim: {fileID: 917474837609320816}

@@ -496,7 +496,7 @@ MonoBehaviour:
   _state: 0
   _agent: {fileID: 2380841924591334694}
   _stopDist: 0
-  _target: {fileID: 0}
+  _target: {fileID: 9057219957798036389, guid: 2d3996248b230534b87fa62e30f75304, type: 3}
   _targetToChase: {fileID: 0}
   displacementDist: 5
   _anim: {fileID: 2594659416715814519}
