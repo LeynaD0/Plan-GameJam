@@ -115,6 +115,7 @@ public class EnemyMovement : MonoBehaviour
                 {
                     Debug.Log("A Distancia");
                     _enemyAttacks.ShootAttack();
+                    _enemyAttacks.canShoot = false;
                 }
                 break;
             case NpcStates.RUN_AWAY:
@@ -153,18 +154,18 @@ public class EnemyMovement : MonoBehaviour
         MoveToPos(_targetToChase.position);
         transform.LookAt(_targetToChase);
 
-        _enemyAttacks.randomAttackType = (int)Random.Range(0, 1);
-
         if (dist <= _stopDist)
         {
-            if (_enemyAttacks.randomAttackType == 0)
+            transform.LookAt(_targetToChase);
+            if (_enemyAttacks.attackType == EnemyAttacks.MELEE)
             {
+                transform.LookAt(_targetToChase);
                 _enemyAttacks.canHit = true;
                 transform.LookAt(_targetToChase);
                 state = NpcStates.ATTACKING;
-            }else if (_enemyAttacks.randomAttackType == 1)
+            }else if (_enemyAttacks.attackType == EnemyAttacks.SHOOT)
             {
-                _enemyAttacks.canShoot = true;
+                transform.LookAt(_targetToChase);
                 transform.LookAt(_targetToChase);
                 state = NpcStates.ATTACKING;
             }

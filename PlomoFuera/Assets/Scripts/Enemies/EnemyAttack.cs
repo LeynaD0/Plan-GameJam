@@ -28,7 +28,7 @@ namespace VictorRivero{
 		[SerializeField] private int _fireDamage;
 		[Space(3)]
 		[Header("Bullet GO")]
-		[SerializeField] private Vector3 _proyectileInitPos;
+		[SerializeField] private Transform _proyectileInitPos;
 		[SerializeField] private GameObject _proyectile;
 		[SerializeField] private float _fireRate;
 		[Space(3)]
@@ -40,6 +40,7 @@ namespace VictorRivero{
 		[Space(3)]
 		[Header("Times")]
 		[SerializeField] private float _meleeTime = 3.0f;
+		[SerializeField]private float nextTime = 0.0f;
 		#endregion
 		#region Public Fields
 		public EnemyAttacks attackType;
@@ -72,7 +73,18 @@ namespace VictorRivero{
 					_meleeTime = 3.0f;
 				}
 			}
-		}
+
+            if (!_canShoot)
+            {
+                nextTime += Time.deltaTime;
+
+                if (nextTime >= _fireRate)
+                {
+                    _canShoot = true;
+					nextTime = 0.0f;
+                }
+            }
+        }
 
 		// Awake is called when the script is
 		// first loaded or when an object is
@@ -107,7 +119,7 @@ namespace VictorRivero{
 		public void ShootAttack()
 		{
             Debug.Log("Ataque a distancia");
-			GameObject clone = Instantiate(_proyectile, _proyectileInitPos, Quaternion.identity);
+			GameObject clone = Instantiate(_proyectile, _proyectileInitPos.position, Quaternion.identity);
 			_canShoot = false;
         }
 		#endregion
