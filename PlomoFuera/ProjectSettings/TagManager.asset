@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Bullet
   - FxTemporaire
+  - Weapon
   layers:
   - Default
   - TransparentFX

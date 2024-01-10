@@ -3564,7 +3564,7 @@ MonoBehaviour:
   controllerScreen: {fileID: 893565505}
   optionsScreen: {fileID: 1967055976}
   creditsScreen: {fileID: 1667389669}
-  timer: 8
+  timer: 3
   enable: 0
 --- !u!82 &1704460745
 AudioSource:

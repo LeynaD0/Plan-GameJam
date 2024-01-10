@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Slider _healthBar;
 
     private Rigidbody[] rb;
+    //[SerializeField] Animator animator;
     
 
     private void Start()
@@ -35,7 +36,6 @@ public class Enemy : MonoBehaviour
         {
             rigidbody.isKinematic = true;
         }
-
 
         _healthBar.maxValue = maxHealth;
         _healthBar.minValue = 0;
@@ -64,11 +64,14 @@ public class Enemy : MonoBehaviour
 
     public void Death()
     {
+        /*
+        animator.enabled = false;
         foreach(Rigidbody rigidbody in rb)
         {
             rigidbody.isKinematic = false;
-        }
+        }*/
+        Spawns.instance.EnemyCount--;
 
-        Destroy(gameObject, 5);
+        Destroy(gameObject);
     }
 }

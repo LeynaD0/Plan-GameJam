@@ -21,7 +21,8 @@ public class Menu : MonoBehaviour
             if(timer <= 0)
             {
                 controllerScreen.SetActive(false);
-                SceneManager.LoadScene("Escenario");
+                Cursor.visible = false;
+                SceneManager.LoadScene(1);
             }
         }
     }
