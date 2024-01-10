@@ -77,6 +77,7 @@ public class HealthManager : MonoBehaviour
 
     public void ModifyHealth(int amount)
     {
+        Debug.Log("Golpeado");
         _curHealth += amount;
 
         if (_curHealth >= health)

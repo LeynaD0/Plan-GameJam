@@ -53,8 +53,6 @@ public class DetectArea : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _movement.state = NpcStates.PATROL;
-            /*_behaviour.target = null;
-            _behaviour.inReach = false;*/
         }
     }
 }

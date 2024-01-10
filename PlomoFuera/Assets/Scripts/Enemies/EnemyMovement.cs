@@ -3,11 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using VictorRivero;
 
 public class EnemyMovement : MonoBehaviour
 {
     [Header("Display")]
     [SerializeField] private EnemyDisplay m_Display;
+    [Space(3)]
+    [Header("EnemyAttack")]
+    [SerializeField] private EnemyAttack _enemyAttacks;
     [Space(3)]
     [Header("States")]
     [SerializeField] private NpcStates _state;
@@ -40,6 +44,10 @@ public class EnemyMovement : MonoBehaviour
     [Header("Control")]
     [SerializeField] private bool _isRandom = false;
 
+    [Space(3)]
+    [Header("Support")]
+    private float dist;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +78,9 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector3 normDir = (_target.position - transform.position).normalized;
         normDir = Quaternion.AngleAxis(45.0f, Vector3.up) * normDir;
+        
+        dist = Vector3.Distance(_target.position, transform.position);
+        
 
         switch (state)
         {
@@ -95,6 +106,16 @@ public class EnemyMovement : MonoBehaviour
                 break;
             case NpcStates.ATTACKING:
                 _isRandom = false;
+                if (_enemyAttacks.inReach)
+                {
+                    Debug.Log("A Melee");
+                    _enemyAttacks.MeleeAttack();
+                }
+                else if (_enemyAttacks.canShoot)
+                {
+                    Debug.Log("A Distancia");
+                    _enemyAttacks.ShootAttack();
+                }
                 break;
             case NpcStates.RUN_AWAY:
                 _isRandom = false;
@@ -130,11 +151,24 @@ public class EnemyMovement : MonoBehaviour
     private void Chasing()
     {
         MoveToPos(_targetToChase.position);
+        transform.LookAt(_targetToChase);
 
-        if (_agent.isStopped)
+        _enemyAttacks.randomAttackType = (int)Random.Range(0, 1);
+
+        if (dist <= _stopDist)
         {
-            state = NpcStates.ATTACKING;
-        }
+            if (_enemyAttacks.randomAttackType == 0)
+            {
+                _enemyAttacks.canHit = true;
+                transform.LookAt(_targetToChase);
+                state = NpcStates.ATTACKING;
+            }else if (_enemyAttacks.randomAttackType == 1)
+            {
+                _enemyAttacks.canShoot = true;
+                transform.LookAt(_targetToChase);
+                state = NpcStates.ATTACKING;
+            }
+        }        
     }
 
     private void RandomPositionMovement()
